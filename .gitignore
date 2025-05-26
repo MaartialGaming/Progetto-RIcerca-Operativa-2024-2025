@@ -1,1 +1,192 @@
-**/__pycache__/
+# MacOS gitignore template
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# System files
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# AFP directories
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Python gitignore template
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Build and distribution
+.Python
+build/
+develop-eggs/
+dist/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer and packaging
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing and coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Documentation
+docs/_build/
+*.mo
+*.pot
+
+# Databases
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Framework specific
+instance/
+.webassets-cache
+.scrapy
+.spyderproject
+.spyproject
+.ropeproject
+celerybeat-schedule
+celerybeat.pid
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build tools
+.pybuilder/
+target/
+.pdm.toml
+.pdm-python
+.pdm-build/
+__pypackages__/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Static analysis
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+cython_debug/
+
+# Documentation
+/site
+
+# General
+*.tmp
+*.bak
+*~
+*.orig
+*.class
+*.exe
+*.dll
+*.obj
+*.o
+*.a
+*.lib
+*.dylib
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.test
+*.cache
+
+# Directories
+.cache/
+.temp/
+.tmp/
+.terraform/
+node_modules/
+bower_components/
+jspm_packages/
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# System
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Windows
+[Tt]humbs.db
+*.lnk
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes
+*-generated.yaml

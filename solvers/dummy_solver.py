@@ -1,11 +1,12 @@
 from .abstract_solver import AbstractSolver
 import numpy as np
 
+
 class DummySolver(AbstractSolver):
     def __init__(self, env):
         super().__init__(env)
         self.name = 'DummySolver'
-    
+
     def solve(self):
         super().solve()
 
@@ -24,7 +25,7 @@ class DummySolver(AbstractSolver):
         Y = np.zeros((N_deposits + 1, N_deposits + 1))
         Y[0, constructions[0] + 1] = 1
         for idx in range(len(constructions) - 1):
-            Y[constructions[idx] + 1,constructions[idx+1] + 1] = 1
+            Y[constructions[idx] + 1, constructions[idx + 1] + 1] = 1
         Y[constructions[-1] + 1, 0] = 1
 
         return X, Y

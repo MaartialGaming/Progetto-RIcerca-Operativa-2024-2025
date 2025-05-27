@@ -12,9 +12,6 @@ class Instance():
         self.service = df.values
         df = pd.read_csv(os.path.join(folder_path, 'distances.csv'), sep = ',', header = None)
         self.distances = df.values
-        print(self.weights)
-        print(self.service)
-        print(self.distances)
 
 if __name__ == '__main__':
     inst = Instance('dummy_problem')

@@ -1,122 +1,58 @@
 ---
-Progetto Ricerca Operativa 2024/2025
+Operational Research Project 2024/2025
 ---
 
-# Descrizione
+# Description
 
-Siete stati incaricati dalla nota azienda avicola *Polli Tech di N.I. &
-Co.* di progettare una catena di distribuzione per la
-commercializzazione dei suoi prodotti. In particolare, l'azienda vi
-richiede di trovare il piazzamento ottimale (tra un insieme possibile di
-posizioni) di magazzini per le merci, i quali hanno lo scopo di
-distribuire i propri prodotti ai supermercati circostanti.
+You have been commissioned by the renowned poultry company *Polli Tech of N.I. & Co.* to design a distribution chain for the commercialization of its products. Specifically, the company requests you to determine the optimal placement (from a set of possible locations) of warehouses for goods, which are intended to distribute their products to nearby supermarkets.
 
-Ogni magazzino ha un costo di costruzione ed è in grado di servire un
-certo sottoinsieme di supermercati. Ogni supermercato non servito da
-nessun magazzino costituisce una perdita economica per l'azienda.
-Infine, il piazzamento dei magazzini deve tenere conto del costo di
-trasporto delle merci dall'azienda ai magazzini stessi, che viene
-effettuato con un unico mezzo che parte dall'azienda, visita ogni
-magazzino e ritorna all'azienda ogni giorno.
+Each warehouse has a construction cost and can serve a certain subset of supermarkets. Each supermarket not served by any warehouse results in an economic loss for the company. Finally, the placement of the warehouses must account for the transportation cost of goods from the company to the warehouses themselves, which is carried out using a single vehicle that departs from the company, visits each warehouse, and returns to the company every day.
 
-# Dati
+# Data
 
-Ogni istanza del problema è composta dai seguenti files:
+Each problem instance consists of the following files:
 
--   `weights.json`: contiene i costi che l'azienda può sostenere, che
-    sono:
+-   `weights.json`: contains the costs the company may incur, which are:
+    -   `’construction’`: daily cost due to the construction and maintenance of a warehouse (assume the construction cost is not a one-time payment but amortized over time).
+    -   `’missed_supermarket’`: daily penalty for a supermarket not served by any warehouse.
+    -   `’travel’`: fuel cost per kilometer traveled.
 
-    -   `’construction’`: costo giornaliero dovuto alla costruzione e
-        alla manutenzione di un magazzino (immaginiamo che la
-        costruzione non sia pagata una tantum ma sia ammortizzata nel
-        tempo)
+-   `service.csv`: a matrix where each row refers to a possible warehouse location and each column to a supermarket. If a warehouse can serve a certain supermarket, the corresponding matrix element is `1`; otherwise, it is `0`.
 
-    -   `’missed_supermarket’`: penalità giornaliera per un supermercato
-        non servito da nessun magazzino
+-   `distances.csv`: a distance matrix between possible warehouse locations and between possible warehouse locations and the company. For both rows and columns, the first element refers to the company, while the others refer to the warehouses, in the same order as in `service.csv`. Each element of the matrix (which is not necessarily symmetric) represents the distance in kilometers from the location in the row to the location in the column.
 
-    -   `’travel’`: costo del carburante per ciascun chilometro di
-        distanza percorso
+# Task
 
--   `service.csv`: matrice in cui ogni riga si riferisce a una possibile
-    posizione dei magazzini e ogni colonna a un supermercato. Se un
-    magazzino può servire un certo supermercato l'elemento della matrice
-    corrispondente è pari a 1, 0 altrimenti.
+Using **Python** as the programming language and **GUROBI** as the solver, develop a linear programming model to solve the problem.
 
--   `distances.csv`: matrice delle distanze tra le possibili posizioni
-    dei magazzini e tra le possibili posizioni dei magazzini e
-    l'azienda. Sia sulle colonne che sulle righe, il primo elemento fa
-    riferimento all'azienda, mentre gli altri ai magazzini, nello stesso
-    ordine in cui si trovano in `service.csv`. Ciascun elemento della
-    matrice (che non è necessariamente simmetrica) rappresenta la
-    distanza in chilometri dal luogo sulla riga al luogo sulla colonna.
+# Technical Requirements
 
-# Richiesta
+The project must be completed in groups of 1-3 people.
 
-Utilizzando **python** come linguaggio di programmazione e **GUROBI**
-come solver, si sviluppi un modello di programmazione lineare per
-risolvere il problema.
+The solver must consist of a single file named `solver_XXXXXX_YYYYYY_ZZZZZZ.py`, where `XXXXXX`, `YYYYYY`, and `ZZZZZZ` are the student IDs of the group members. For example, if a group consists of two people with student IDs `123456` and `654321`, the file should be named `solver_123456_654321.py`. If a student with ID `999999` decides to work individually, the file should be named `solver_999999.py`.
 
-# Requisiti tecnici
+The file must contain a class that inherits from the `AbstractSolver` class and must be named exactly as the file that contains it. For example, students with IDs `123456` and `654321` will have a file named `solver_123456_654321.py` containing the class `class solver_123456_654321(AbstractSolver):`.
 
-Il progetto deve essere svolto in gruppi di 1-3 persone.
+In this class, you must implement the `solve()` method, which should take no input (the necessary data is available in `self.inst`) and must return, in order, the vector `X` and the matrix `Y` as output.
 
-Il solver deve essere costituito da un solo file dal nome `solver_XXXXXX_YYYYYY_ZZZZZZ.py` dove `XXXXXX`, `YYYYYY` e
-`ZZZZZZ` sono i numeri di matricola dei componenti del gruppo. Per
-esempio, se un gruppo è formato da due persone le cui matricole sono
-123456 e 654321, il file dovrà chiamarsi `solver_123456_654321.py`, mentre se la matricola 999999
-decidesse di fare individualmente il progetto, il file dovrà chiamarsi `solver_999999.py`.
+The vector `X` is a binary vector with a length equal to the total number of possible warehouse locations. Each element is `1` (or `True`) if a warehouse is built in that location, and `0` (or `False`) otherwise.
 
-Al suo interno il file dovrà contenere una classe che eredita la classe
-`AbstractSolver` e che si deve chiamare esattamente come il file che la
-contiene. Per esempio, le matricole 123456 e 654321 avranno un file che
-si chiama `solver_123456_654321.py` che contiene la classe `class solver_123456_654321(AbstractSolver):`.
-
-In questa classe è necessario implementare il metodo `solve()`, il quale
-non deve prendere nulla in input (i dati necessari sono presenti in
-`self.inst`) e deve ritornare come output, in ordine, il vettore `X` e
-la matrice `Y`.
-
-Il vettore `X` è un vettore binario lungo quanto il numero totale di
-possibili posizioni dei magazzini e ogni elemento è pari a `1` (o
-`True`) se un magazzino è costruito in quella posizione, `0` (o `False`)
-altrimenti.
-
-La matrice `Y` è una matrice binaria le cui dimensioni sono entrambe
-pari al numero di possibili posizioni dei magazzini più uno (quindi ha
-le stesse dimensioni della matrice delle distanze contenuta in
-`distances.csv`). La prima riga e colonna si riferiscono all'azienda,
-le rimandenti alle possibili posizioni per i magazzini. Il generico
-elemento `i,j` della matrice è uguale a `1` (o `True`) se il percorso
-del mezzo prevede la tratta da `i` a `j`, `0` (o `False`) altrimenti.
+The matrix `Y` is a binary matrix where both dimensions are equal to the number of possible warehouse locations plus one (so it has the same dimensions as the distance matrix in `distances.csv`). The first row and column refer to the company, while the remaining rows and columns refer to the possible warehouse locations. The generic element `i,j` of the matrix is `1` (or `True`) if the vehicle’s route includes the path from `i` to `j`, and `0` (or `False`) otherwise.
 
 # Testing
 
-Per testare il solver necessario seguire i seguenti step:
+To test the solver, follow these steps:
 
--   inserire il file all'interno della cartella `solvers`;
+-   Place the file inside the `solvers` folder.
+-   Update the `solvers/__init__.py` file by importing the solver and adding the class name to `__all__`.
+-   Replace the `DummySolver` in `main.py` with your solver.
+-   Run `main.py` to use the solver.
+-   Run `evaluator.py` to see the total cost of the solution found by the solver.
 
--   aggiornare il file `solvers/__init__.py` importando il solver e
-    aggiungendo il nome della classe dentro a `__all__`;
+# Important Note
 
--   sostituire il `DummySolver` nel `main.py` con il solver;
-
--   lanciare il `main.py` per utilizzare il solver;
-
--   lanciare il `evaluator.py` per vedere il costo totale della
-    soluzione trovata dal solver.
-
-# Nota bene
-
-I solver consegnati verranno testati per la valutazione esattamente come
-descritto nella sezione precedente, quindi con gli stessi identici mezzi
-che vi sono resi disponibili in fase di sviluppo. Per questo motivo, se
-il `main.py` e il `evaluator.py` dovessero produrre errore (a causa
-del nome del file, del nome della classe, del formato di output
-sbagliato, o per qualsiasi altro motivo) quando lanciati, al progetto
-verranno automaticamente assegnati 0 punti.
+The submitted solvers will be evaluated exactly as described in the previous section, using the same tools provided during development. Therefore, if `main.py` or `evaluator.py` produce an error (due to incorrect file name, class name, output format, or any other reason) when executed, the project will automatically receive **0 points**.
 
 # Deadline
 
-Il progetto deve essere consegnato tramite la sezione **Elaborati** del
-Portale della didattica (uno solo per gruppo) entro le 23:59 del giorno
-30/06/2025.
+The project must be submitted via the **Elaborati** section of the Teaching Portal (one submission per group) by **23:59 on 30/06/2025**.

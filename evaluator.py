@@ -11,18 +11,18 @@ f = open(os.path.join(folder_path, 'weights.json'), 'r')
 weights = json.load(f)
 f.close()
 
-df = pd.read_csv(os.path.join(folder_path, 'service.csv'), sep = ',', header = None)
+df = pd.read_csv(os.path.join(folder_path, 'service.csv'), sep=',', header=None)
 service = df.values
 
-df = pd.read_csv(os.path.join(folder_path, 'distances.csv'), sep = ',', header = None)
+df = pd.read_csv(os.path.join(folder_path, 'distances.csv'), sep=',', header=None)
 distances = df.values
 
 folder_path = os.path.join('.', 'results', f'{instance_name}')
 
-df = pd.read_csv(os.path.join(folder_path, 'deposit_locations.csv'), sep = ',', header = None)
+df = pd.read_csv(os.path.join(folder_path, 'deposit_locations.csv'), sep=',', header=None)
 deposit_locations = df.values
 
-df = pd.read_csv(os.path.join(folder_path, 'path.csv'), sep = ',', header = None)
+df = pd.read_csv(os.path.join(folder_path, 'path.csv'), sep=',', header=None)
 path = df.values
 
 (N_deposits, N_supermarkets) = service.shape
@@ -33,7 +33,8 @@ N_missed_supermarkets = N_supermarkets - len(np.nonzero(np.matmul(deposit_locati
 
 travel_length = np.sum(distances * path)
 
-total_cost = N_constructions * weights['construction'] + N_missed_supermarkets * weights['missed_supermarket'] + travel_length * weights['travel']
+total_cost = N_constructions * weights['construction'] + N_missed_supermarkets * weights[
+    'missed_supermarket'] + travel_length * weights['travel']
 
 print('\n-----------------------COSTS-----------------------')
 print('\t\t\t\tQ.TY\t\tCOST')

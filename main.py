@@ -7,7 +7,7 @@ instance_name = 'dummy_problem'
 
 inst = Instance(instance_name)
 env = Environment(inst)
-solver = DummySolver(env)
+solver = solver_327795_327796(env)
 
 X, Y = solver.solve()
 
